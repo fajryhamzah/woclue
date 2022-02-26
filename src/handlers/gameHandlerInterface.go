@@ -2,5 +2,6 @@ package handlers
 
 type GameHandlerInterface interface {
 	GetGameCode() string
-	GetAnswer() string
+	GetAnswer(input GameInput) string
+	GetGameUrl() string
 }
