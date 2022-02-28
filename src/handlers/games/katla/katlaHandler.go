@@ -8,8 +8,8 @@ import (
 	"strings"
 
 	"github.com/PuerkitoBio/goquery"
+	"github.com/fajryhamzah/worclue/src/enums"
 	"github.com/fajryhamzah/worclue/src/exceptions"
-	"github.com/fajryhamzah/worclue/src/handlers"
 )
 
 type Katla struct{}
@@ -21,7 +21,7 @@ func (k Katla) GetGameCode() string {
 	return CODE
 }
 
-func (k Katla) GetAnswer(input handlers.GameInput) string {
+func (k Katla) GetAnswer(input enums.GameInput) string {
 	hash := input.HashInput
 
 	if hash == "" {

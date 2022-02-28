@@ -1,4 +1,4 @@
-package handlers
+package enums
 
 type GameAnswer struct {
 	Answer      string

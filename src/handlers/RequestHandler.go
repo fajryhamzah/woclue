@@ -4,10 +4,11 @@ import (
 	"encoding/json"
 	"net/http"
 
+	"github.com/fajryhamzah/worclue/src/enums"
 	"github.com/fajryhamzah/worclue/src/exceptions"
 )
 
-func validateRequest(gameInput GameInput) {
+func validateRequest(gameInput enums.GameInput) {
 	if gameInput.Code == "" {
 		exceptions.Throw(422, "Code must not empty")
 	}
@@ -17,8 +18,8 @@ func validateRequest(gameInput GameInput) {
 	}
 }
 
-func createGameInput(r *http.Request) GameInput {
-	var gameInput GameInput
+func createGameInput(r *http.Request) enums.GameInput {
+	var gameInput enums.GameInput
 
 	err := json.NewDecoder(r.Body).Decode(&gameInput)
 	if err != nil {
