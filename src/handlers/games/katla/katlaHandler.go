@@ -21,14 +21,14 @@ func (k Katla) GetGameCode() string {
 	return CODE
 }
 
-func (k Katla) GetAnswer(input enums.GameInput) string {
+func (k Katla) GetAnswer(input enums.GameInput) enums.GameAnswer {
 	hash := input.HashInput
 
 	if hash == "" {
 		hash = k.getHash()
 	}
 
-	return k.process(hash)
+	return enums.GameAnswer{Answer: k.process(hash)}
 }
 
 func (k Katla) GetGameUrl() string {

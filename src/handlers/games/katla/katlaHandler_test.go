@@ -3,7 +3,7 @@ package katla
 import (
 	"testing"
 
-	"github.com/fajryhamzah/worclue/src/handlers"
+	"github.com/fajryhamzah/worclue/src/enums"
 )
 
 var katlaHandler Katla = Katla{}
@@ -15,9 +15,9 @@ func TestGetGameCode(t *testing.T) {
 }
 
 func TestGetAnswer(t *testing.T) {
-	answer := katlaHandler.GetAnswer(handlers.GameInput{})
+	answer := katlaHandler.GetAnswer(enums.GameInput{})
 
-	if answer == "" {
+	if answer.Answer == "" {
 		t.Error("Empty result ")
 	}
 }
