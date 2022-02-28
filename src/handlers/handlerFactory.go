@@ -1,5 +1,5 @@
 package handlers
 
-func createHandler() GameHandlerInterface {
+func createHandler(gameInput GameInput) GameHandlerInterface {
 	panic("game handler not found")
 }

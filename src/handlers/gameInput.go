@@ -1,5 +1,6 @@
 package handlers
 
 type GameInput struct {
-	HashInput string
+	Code      string `json:"code"`
+	DateInput string `json:"date_input"`
 }
