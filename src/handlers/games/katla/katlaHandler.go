@@ -3,14 +3,12 @@ package katla
 import (
 	"encoding/base64"
 	"encoding/json"
-	"errors"
-	"fmt"
-	"log"
 	"net/http"
 	"strconv"
 	"strings"
 
 	"github.com/PuerkitoBio/goquery"
+	"github.com/fajryhamzah/worclue/src/exceptions"
 	"github.com/fajryhamzah/worclue/src/handlers"
 )
 
@@ -41,23 +39,19 @@ func (k Katla) getHash() string {
 	res, err := http.Get(k.GetGameUrl())
 
 	if err != nil {
-		fmt.Println("Gagal ginii")
-		panic(err)
+		exceptions.Throw(500, "Failed to get response from "+k.GetGameUrl())
 	}
 
 	defer res.Body.Close()
 
 	if res.StatusCode != 200 {
-		log.Fatalf("status code error: %d %s", res.StatusCode, res.Status)
-		panic("Failed to get response from " + k.GetGameUrl())
+		exceptions.Throw(res.StatusCode, "Failed to get response from "+k.GetGameUrl())
 	}
 
 	doc, err := goquery.NewDocumentFromReader(res.Body)
 
 	if err != nil {
-		fmt.Println("Gagal ginii1")
-
-		panic(err)
+		exceptions.Throw(500, "Failed to decode response")
 	}
 
 	var response katlaData
@@ -73,7 +67,7 @@ func (k Katla) process(hash string) string {
 	split := strings.Split(decoded, "::")
 
 	if len(split) != 3 {
-		panic(errors.New("hash should be have 3 section"))
+		exceptions.Throw(500, "Hash must have 3 section")
 	}
 
 	return k.decode(split[1])
@@ -84,7 +78,7 @@ func (k Katla) decode(hash string) string {
 	numberOfEqualSign, err := strconv.Atoi(hash[realHashCount:])
 
 	if err != nil {
-		panic(errors.New("failed to convert equal sign"))
+		exceptions.Throw(500, "Failed to convert equal sign")
 	}
 
 	realHash := hash[0:realHashCount]
@@ -108,9 +102,7 @@ func (k Katla) decode(hash string) string {
 	decoded, err := base64.StdEncoding.DecodeString(fullString + equalSign)
 
 	if err != nil {
-		fmt.Println("Gagal aaaginii", fullString+equalSign)
-
-		panic(err)
+		exceptions.Throw(500, "Failed to decode string "+fullString+equalSign)
 	}
 
 	return string(decoded)

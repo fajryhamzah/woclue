@@ -2,13 +2,15 @@ package server
 
 import (
 	"net/http"
+
+	"github.com/fajryhamzah/worclue/src/exceptions"
 )
 
 func post(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 
 		if r.Method != "POST" {
-			panic("request must be POST")
+			exceptions.Throw(422, "Request must be POST")
 		}
 
 		next.ServeHTTP(w, r)
