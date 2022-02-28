@@ -15,14 +15,9 @@ func post(next http.Handler) http.Handler {
 	})
 }
 
-func errorHandler(next http.Handler) http.Handler {
+func setContentType(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-
-		defer func(w http.ResponseWriter) {
-			if r := recover(); r != nil {
-				w.Write([]byte("Halo semua"))
-			}
-		}(w)
+		w.Header().Set("Content-Type", "application/json")
 
 		next.ServeHTTP(w, r)
 	})

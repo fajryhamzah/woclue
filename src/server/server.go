@@ -13,7 +13,6 @@ func InitServer() {
 	error := http.ListenAndServe(port, nil)
 
 	if error != nil {
-		fmt.Println(error)
 		panic("failed to initialize server")
 	}
 }
