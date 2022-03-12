@@ -1,1 +1,1 @@
-web: bin/woclue
+web: bin/worclue
