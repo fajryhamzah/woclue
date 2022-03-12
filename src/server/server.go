@@ -10,10 +10,11 @@ func InitServer() {
 	initiateRoutes()
 	port := fmt.Sprintf(":%s", os.Getenv("PORT"))
 
-	if port == "" {
-		port = "8000"
+	if port == ":" {
+		port += "8000"
 	}
 
+	print("Start server at port " + port)
 	error := http.ListenAndServe(port, nil)
 
 	if error != nil {

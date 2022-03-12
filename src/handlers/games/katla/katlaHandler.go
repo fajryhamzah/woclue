@@ -14,11 +14,20 @@ import (
 
 type Katla struct{}
 
+const NAME string = "Katla"
 const CODE string = "katla"
 const URL string = "https://katla.vercel.app/"
 
 func (k Katla) GetGameCode() string {
 	return CODE
+}
+
+func (k Katla) GetName() string {
+	return NAME
+}
+
+func (k Katla) GetDescription() string {
+	return "Indonesian version of wordle"
 }
 
 func (k Katla) GetAnswer(input enums.GameInput) enums.GameAnswer {

@@ -9,5 +9,8 @@ import (
 
 func initiateRoutes() {
 	mainHandler := http.HandlerFunc(handlers.MainHandler)
+	listGameHandler := http.HandlerFunc(handlers.ListGameHandler)
+
 	http.Handle("/game", exceptions.ErrorHandlerMiddleware(setContentType(post(mainHandler))))
+	http.Handle("/", exceptions.ErrorHandlerMiddleware(setContentType(get(listGameHandler))))
 }

@@ -17,3 +17,11 @@ func MainHandler(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(answer)
 
 }
+
+func ListGameHandler(w http.ResponseWriter, r *http.Request) {
+	gameList := getGameListHandler()
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusCreated)
+
+	json.NewEncoder(w).Encode(transformListGame(gameList))
+}

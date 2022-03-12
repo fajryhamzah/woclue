@@ -6,4 +6,6 @@ type GameHandlerInterface interface {
 	GetGameCode() string
 	GetAnswer(input enums.GameInput) enums.GameAnswer
 	GetGameUrl() string
+	GetName() string
+	GetDescription() string
 }
