@@ -8,7 +8,11 @@ import (
 
 func InitServer() {
 	initiateRoutes()
-	port := fmt.Sprintf(":%s", os.Getenv("SERVER_PORT"))
+	port := fmt.Sprintf(":%s", os.Getenv("PORT"))
+
+	if port == "" {
+		port = "8000"
+	}
 
 	error := http.ListenAndServe(port, nil)
 
